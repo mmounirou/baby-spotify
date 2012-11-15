@@ -1,42 +1,61 @@
 <html>
+    <head>
+        <link href="./css/bootstrap.css" rel="stylesheet">
+        <link href="./css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="./css/simple.css" rel="stylesheet">
+    </head>
+    
+    
     <body>
         <div id="spotifyapp">
-            <input id="search" type="text" placeholder="Search" />
-        </div>
-        <div>
-            <h2> Tracks</h2>
-            <div id="tracks-result"></div>            
-            <h2> Albums</h2>
-            <div id="albums-result"></div>
-            <h2> Artists</h2>
-            <div id="artists-result"></div>
-        </div>
+            <div class="row">
+                <div class="span1"></div>
+                <span class="brand">Baby Spotify</span>
+                <input id="search" type="text" placeholder="Search" class="input-medium span2 search-query pull-right">
+                <div class="span1"></div>
+            </div>
+            <div class="container-fluid hero-unit">
+                <div class="row-fluid">
+                    <table class="table-striped">
+                        <div id="artists-result" class="span5"></div>
+                    </table>
+                    <div id="albums-result" class="span5"></div>
+                </div>
+                    <table class="table-striped">
+                       <div>
+                           <div id="tracks-result" class="span10"></div>
+                        </div>
+                    </table>
+            </div>
+        </div>  
         
         <script type="text/template" id="album-template">
             <div class="album">
-              <iframe src="https://embed.spotify.com/?uri=<%- href %>" width="80" height="80" frameborder="0" allowtransparency="true"></iframe>
-              <a href="#artist/<%- _.first(_.toArray(artists)).href %>"><%- _.first(_.toArray(artists)).name %></a>
-              <a href="#album/<%- href %>"> <%- name %></a>
+                <td><iframe src="https://embed.spotify.com/?uri=<%- href %>" width="80" height="80" frameborder="0" allowtransparency="true"></iframe></td>
+                <td><a href="#artist/<%- _.first(_.toArray(artists)).href %>"><%- _.first(_.toArray(artists)).name %></a></td>
+                <td><a href="#album/<%- href %>"> <%- name %></a></td>
             </div>
         </script>
         <script type="text/template" id="artist-template">
             <div class="artist">
-              <iframe src="https://embed.spotify.com/?uri=<%- href %>" width="80" height="80" frameborder="0" allowtransparency="true"></iframe>
-              <a href="#artist/<%- href %>"> <%- name %></a>
+              <td><iframe src="https://embed.spotify.com/?uri=<%- href %>" width="80" height="80" frameborder="0" allowtransparency="true"></iframe></td>
+              <td><a href="#artist/<%- href %>"> <%- name %></a></td>
             </div>
         </script>
         <script type="text/template" id="track-template">
             <div class="track">
-              <iframe src="https://embed.spotify.com/?uri=<%- href %>" width="80" height="80" frameborder="0" allowtransparency="true"></iframe>
-              <a href="#artist/<%- _.first(_.toArray(artists)).href %>"><%- _.first(_.toArray(artists)).name %></a>
-              <a href="#album/<%- album.href %>"> <%- album.name %></a>
-              <a href="#track/<%- href %>"> <%- name %></a>
+              <td><iframe src="https://embed.spotify.com/?uri=<%- href %>" width="80" height="80" frameborder="0" allowtransparency="true"></iframe></td>
+              <td><a href="#artist/<%- _.first(_.toArray(artists)).href %>"><%- _.first(_.toArray(artists)).name %></a></td>
+              <td><a href="#album/<%- album.href %>"> <%- album.name %></a></td>
+              <td><a href="#track/<%- href %>"> <%- name %></a></td>
             </div>
         </script>
-        <script src="./js/libs/json2.js"></script>
-        <script src="./js/libs/jquery-min.js"></script>
-        <script src="./js/libs/underscore-min.js"></script>
-        <script src="./js/libs/backbone.js"></script>
+        <script src="./js/deps/json2.js"></script>
+        <script src="./js/deps/jquery-min.js"></script>
+        <script src="./js/deps/underscore-min.js"></script>
+        <script src="./js/deps/backbone.js"></script>
+        <script src="./js/models/search.js"></script>
+        <script src="./js/views/search.js"></script>
         <script src="./js/main.js"></script>
     </body>
 </html>

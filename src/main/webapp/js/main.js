@@ -1,106 +1,4 @@
-$(function () {
-    var TrackView = Backbone.View.extend({
-        template: _.template($('#track-template').html()),
-        render: function() {
-              this.$el.html(this.template(this.model.toJSON()));
-              return this;
-        }
-    });
-
-    var AlbumView = Backbone.View.extend({
-        template: _.template($('#album-template').html()),
-        render: function() {
-              this.$el.html(this.template(this.model.toJSON()));
-              return this;
-        }
-    });
-    
-    var ArtistView = Backbone.View.extend({
-        template: _.template($('#artist-template').html()),
-        render: function() {
-              this.$el.html(this.template(this.model.toJSON()));
-              return this;
-        }
-    });
-    
-    var TracksView = Backbone.View.extend({
-        initialize : function(){
-            this.collection.each(this.add);
-            _(this).bindAll('add', 'remove');
-        },
-        add : function(track){
-            var dv = new TrackView({
-                tagName : 'li',
-                model : track
-            });
-            $(this.el).append(dv.render().el);
-        },
-        el:$("#tracks-result"),
-        render : function() {
-            $(this.el).empty();
-            this.collection.each(this.add);
-            return this;
-          }
-    });
-    
-    var ArtistsView = Backbone.View.extend({
-        initialize : function(){
-            this.collection.each(this.add);
-            _(this).bindAll('add', 'remove');
-        },
-        add : function(artist){
-            var dv = new ArtistView({
-                tagName : 'li',
-                model : artist
-            });
-            $(this.el).append(dv.render().el);
-        },
-        el:$("#artists-result"),
-        render : function() {
-            $(this.el).empty();
-            this.collection.each(this.add);
-            return this;
-          }
-    });
-    
-    var AlbumsView = Backbone.View.extend({
-        initialize : function(){
-            this.collection.each(this.add);
-            _(this).bindAll('add', 'remove');
-        },
-        add : function(album){
-            var dv = new AlbumView({
-                tagName : 'li',
-                model : album
-            });
-            $(this.el).append(dv.render().el);
-        },
-        el:$("#albums-result"),
-        render : function() {
-            $(this.el).empty();
-            this.collection.each(this.add);
-            return this;
-          }
-    });
-    
-    var Tracks = Backbone.Collection.extend({
-        parse: function(response) {
-            return response.tracks;
-        }
-    });
-    
-    var Artists = Backbone.Collection.extend({
-        parse: function(response) {
-            return response.artists;
-        }
-    });
-    
-    var Albums = Backbone.Collection.extend({
-        parse: function(response) {
-            return response.albums;
-        }
-    });
-    
+$(function () {    
     var AppView = Backbone.View.extend({
         el: $("#spotifyapp"),
         
@@ -125,9 +23,9 @@ $(function () {
         initialize: function() {
             console.log("test initialize");
             this.input = this.$("#search");
-            this.tracksResults = new Tracks();
-            this.albumsResults = new Albums();
-            this.artistsResults = new Artists();
+            this.tracksResults = new TracksResult();
+            this.albumsResults = new AlbumsResult();
+            this.artistsResults = new ArtistsResult();
 
             this.tracksView = new TracksView({collection : this.tracksResults});
             this.albumsView = new AlbumsView({collection : this.albumsResults});

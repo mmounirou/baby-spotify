@@ -1,77 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>CloudBees</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- Le styles -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <style type="text/css">
-      body {
-        padding-top: 60px;
-      }
-    </style>
-
-    <!-- using require js -->
-    <script data-main="js/main" src="js/libs/require/require.js"></script>
-  </head>
-
-    <!-- welcome to clickstart message -->
-    <div class="well">      
-      <div class="alert alert-success">
-      <h4>Congratulations! Your App, DB, Repo and Jenkins build have successfully been deployed from a CloudBees clickstart.</h4>      
-      </div>
-        <h3>To develop your application:</h3>
-        <ul>
-        <li>Make sure you have an ssh public key setup on <a href="https://grandcentral.cloudbees.com/user/ssh_keys">Cloudbees</a>
-        <li>Clone the git repo: <code>git clone ssh://git@git.cloudbees.com/<script>document.write(location.hostname.split(".")[1])</script>/<script>document.write(location.hostname.split(".")[0])</script>.git</code>
-        <li>Make your changes (hint, this message is in src/main/webapp/index.html)
-        <li>Push your changes: <code>git push origin master</code> to the cloudbees repo just created for you.        
-        <li>CloudBees will take care of the building/testing/deployment from there.
-      </ul>      
-    </div>
-
-  <body>
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <a class="brand" href="#">WordSmith</a>
-          <ul class="nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
+<html>
+    <body>
+        <div id="spotifyapp">
+            <input id="search" type="text" placeholder="Search" />
         </div>
-      </div>
-    </div>
-
-    <div class="container-fluid">
-      <div class="span3">
-        <div class="well sidebar-nav">
-          <ul class="nav nav-list">
-            <li class="nav-header">Words</li>
-            <li><a href="#manageWords">Manage</a></li>
-            <li><a href="#newWord">Add New Word</a></li>
-          </ul>
+        <div>
+            <h2> Tracks</h2>
+            <div id="tracks-result"></div>            
+            <h2> Albums</h2>
+            <div id="albums-result"></div>
+            <h2> Artists</h2>
+            <div id="artists-result"></div>
         </div>
-      </div>
-      <div class="content span9">
-        <!-- Main hero unit for a primary marketing message or call to action -->
-        <div id="page">
-          Loading...
-        </div>
-        <footer>
-        </footer>
-      </div>
-    </div>
-
-
-  </body>
+        
+        <script type="text/template" id="album-template">
+            <div class="album">
+              <iframe src="https://embed.spotify.com/?uri=<%- href %>" width="80" height="80" frameborder="0" allowtransparency="true"></iframe>
+              <a href="#artist/<%- _.first(_.toArray(artists)).href %>"><%- _.first(_.toArray(artists)).name %></a>
+              <a href="#album/<%- href %>"> <%- name %></a>
+            </div>
+        </script>
+        <script type="text/template" id="artist-template">
+            <div class="artist">
+              <iframe src="https://embed.spotify.com/?uri=<%- href %>" width="80" height="80" frameborder="0" allowtransparency="true"></iframe>
+              <a href="#artist/<%- href %>"> <%- name %></a>
+            </div>
+        </script>
+        <script type="text/template" id="track-template">
+            <div class="track">
+              <iframe src="https://embed.spotify.com/?uri=<%- href %>" width="80" height="80" frameborder="0" allowtransparency="true"></iframe>
+              <a href="#artist/<%- _.first(_.toArray(artists)).href %>"><%- _.first(_.toArray(artists)).name %></a>
+              <a href="#album/<%- album.href %>"> <%- album.name %></a>
+              <a href="#track/<%- href %>"> <%- name %></a>
+            </div>
+        </script>
+        <script src="./js/libs/json2.js"></script>
+        <script src="./js/libs/jquery-min.js"></script>
+        <script src="./js/libs/underscore-min.js"></script>
+        <script src="./js/libs/backbone.js"></script>
+        <script src="./js/main.js"></script>
+    </body>
 </html>

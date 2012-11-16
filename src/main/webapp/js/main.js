@@ -67,11 +67,7 @@ $(function() {
         artist: function(query) {
             var view = mainAppView;
             view.clean();
-            var artist = new Backbone.Model({
-                id: query
-            });
-
-            artist.url = "http://ws.spotify.com/lookup/1/.json?uri=" + query + "&extras=album";
+            var artist = new Album({href: query});
             artist.fetch({
                 success: function() {
                     view.albumsResults.add(artist.get("artist").albums.map(function(album) {

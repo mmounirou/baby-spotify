@@ -12,7 +12,8 @@ var ArtistsView = Backbone.View.extend({
     render : function(){
         var source   = $("#artist-results-tpl").html();
         var template = Handlebars.compile(source);
-        return this.$el.html(template(this.collection.first().toJSON()));    }
+        return this.$el.html(template(this.collection.first().toJSON()));    
+    }
 });
 
 var AlbumsView = Backbone.View.extend({
@@ -20,5 +21,6 @@ var AlbumsView = Backbone.View.extend({
     render : function(){
         var source   = $("#album-results-tpl").html();
         var template = Handlebars.compile(source);
-        return this.$el.html(template(this.collection.first().toJSON()));    }
+        return this.$el.html(template(this.collection.first().toJSON()));    
+    }
 });

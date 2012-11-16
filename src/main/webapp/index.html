@@ -16,15 +16,14 @@
                 <input id="search" type="text" placeholder="Search" class="input-medium span2 search-query pull-right">
             </div>
             <div class="jumbotron">
-            <div class="row-fluid">
-                <div id="artists-result" class="span6 box"></div>
-                <div id="albums-result" class="span6 box"></div>
+                <div class="row-fluid">
+                    <div id="artists-result" class="span6 box"></div>
+                    <div id="albums-result" class="span6 box"></div>
+                </div>
+                <div class="row-fluid">
+                  <div id="tracks-result" class="box" ></div>
+                </div>
             </div>
-            <div class="row-fluid">
-              <div id="tracks-result" class="box" ></div>
-            </div>
-            </div>
-
         </div>
 
         <script id="track-results-tpl"  type="text/x-handlebars-template">
@@ -71,6 +70,67 @@
                     </tr>
                 {{/each}}
             </table>
+        </script>
+        
+        <script id="artist-lookup-tpl"  type="text/x-handlebars-template">
+            {{#with artist}}
+                <div>
+                    <iframe src = "https://embed.spotify.com/?uri={{href}}" width = "80" height = "80" frameborder = "0" allowtransparency = "true" ></iframe></div>
+                    <a href = "#artist/{{href}}">{{name}} </a>
+                </div>
+                <div>
+                    <h2>Albums</h2>
+                    <div>
+                        {{#each own_albums}}
+                            <div>
+                                <div>
+                                    <iframe src = "https://embed.spotify.com/?uri={{href}}" width = "80" height = "80" frameborder = "0" allowtransparency = "true" ></iframe>
+                                </div>
+                                <div>
+                                    <h2>{{name}}</h2>
+                                    <div>
+                                        {{#each fetched_tracks}}
+                                            <tr>
+                                                <td>{{track-number}}</td>
+                                                <td>{{name}}</td>
+                                                <td>{{length}}</td>
+                                                <td>{{popularity}}</td>
+                                            <!-- <td><iframe src = "https://embed.spotify.com/?uri={{href}}" width = "80" height = "80" frameborder = "0" allowtransparency = "true" ></iframe></td>-->
+                                            </tr>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                            </div>
+                        {{#each}}
+                    </div>
+                </div>
+                <div>
+                    <h2>Appears On</h2>
+                    <div>
+                        {{#each feat_albums}}
+                            <div>
+                                <div>
+                                    <iframe src = "https://embed.spotify.com/?uri={{href}}" width = "80" height = "80" frameborder = "0" allowtransparency = "true" ></iframe>
+                                </div>
+                                <div>
+                                    <h2>{{name}}</h2>
+                                    <div>
+                                        {{#each containsArtist fetched_tracks ../name}}
+                                            <tr>
+                                                <td>{{track-number}}</td>
+                                                <td>{{name}}</td>
+                                                <td>{{length}}</td>
+                                                <td>{{popularity}}</td>
+                                            <!-- <td><iframe src = "https://embed.spotify.com/?uri={{href}}" width = "80" height = "80" frameborder = "0" allowtransparency = "true" ></iframe></td>-->
+                                            </tr>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                            </div>
+                        {{#each}}
+                    </div>
+                </div>
+            {{/with}}
         </script>
 
         <script src="./js/deps/json2.js"></script>

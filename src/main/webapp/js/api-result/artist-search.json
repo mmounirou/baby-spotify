@@ -1,0 +1,27 @@
+{
+    "info": {
+        "num_results": 3,
+        "limit": 100,
+        "offset": 0,
+        "query": "p square",
+        "type": "artist",
+        "page": 1
+    },
+    "artists": [
+        {
+            "href": "spotify:artist:42IUN9kTPdUdI1kre6L7Wk",
+            "name": "P-Square",
+            "popularity": "0.31031"
+        },
+        {
+            "href": "spotify:artist:7GMRPo5TgblzadwKoDprzA",
+            "name": "P Square",
+            "popularity": "0.03384"
+        },
+        {
+            "href": "spotify:artist:6XcHayQgMRAq2USqU27EGj",
+            "name": "P. Square",
+            "popularity": "0.00010"
+        }
+    ]
+}
